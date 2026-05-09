@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tres en Raya IA | Minimax + OpenCV</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Inteligencia Artificial aplicada</p>
+          <h1>Tres en Raya Invencible</h1>
+          <p class="subtitle">Minimax con Poda Alfa-Beta, deteccion facial OpenCV y tablero interactivo en HTML.</p>
+        </div>
+        <div class="hero-status">
+          <span id="facePill" class="pill waiting">Esperando rostro</span>
+          <span id="turnPill" class="pill">Turno humano</span>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <section class="board-zone" aria-label="Tablero de Tres en Raya">
+          <div id="board" class="board"></div>
+          <div id="notice" class="notice">Mira a la camara para activar tu turno.</div>
+        </section>
+
+        <aside class="control-panel">
+          <section class="panel-block">
+            <div class="panel-title">Configuracion</div>
+
+            <label class="field-label" for="difficulty">Modo de juego</label>
+            <div class="segmented" id="difficulty" role="group" aria-label="Modo de juego">
+              <button type="button" data-difficulty="facil">Facil</button>
+              <button type="button" data-difficulty="normal">Normal</button>
+              <button type="button" data-difficulty="imposible" class="active">Imposible</button>
+            </div>
+
+            <label class="field-label" for="starter">Inicia</label>
+            <div class="segmented" id="starter" role="group" aria-label="Jugador inicial">
+              <button type="button" data-starter="humano" class="active">Humano</button>
+              <button type="button" data-starter="ia">IA</button>
+            </div>
+
+            <label class="toggle-row">
+              <input id="cameraGate" type="checkbox" checked>
+              <span>Exigir rostro para jugar</span>
+            </label>
+
+            <button id="newGame" class="primary-button" type="button">Nueva partida</button>
+          </section>
+
+          <section class="panel-block camera-block">
+            <div class="panel-title">Vision OpenCV</div>
+            <div class="camera-frame">
+              <img id="camera" src="/video-feed" alt="Camara con deteccion facial OpenCV">
+            </div>
+            <p id="faceMessage" class="microcopy">Inicializando camara...</p>
+          </section>
+
+          <section class="panel-block metrics">
+            <div class="panel-title">Rendimiento IA</div>
+            <div class="metric-grid">
+              <div>
+                <span>Modo</span>
+                <strong id="metricMode">Imposible</strong>
+              </div>
+              <div>
+                <span>Nodos</span>
+                <strong id="metricNodes">0</strong>
+              </div>
+              <div>
+                <span>Tiempo</span>
+                <strong id="metricTime">0 ms</strong>
+              </div>
+              <div>
+                <span>Puntaje</span>
+                <strong id="metricScore">0</strong>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
